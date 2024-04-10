@@ -26,11 +26,10 @@ export class FetchApiDataService {
    */
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
-    catchError(this.handleError)
+    return this.http.post(apiUrl + '/users', userDetails).pipe(
+      catchError(this.handleError)
     );
   }
-
   /**
    * Making the api call for the user login endpoint
    * @param {any} userDetails - User details for login.
