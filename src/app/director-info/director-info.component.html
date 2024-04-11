@@ -1,21 +1,10 @@
-<mat-card class="director-dialog">
-    <button
-      class="director-close-button"
-      mat-stroked-button
-      aria-label="Close the director details button"
-      mat-dialog-close
-      color="primary"
-    >
-      X
-    </button>
-    <mat-card-title>
-      <h3 class="director-dialog-title">{{ data.director.Name }}</h3>
-    </mat-card-title>
-    <br />
-    <mat-dialog-content class="director-dialog-content">
-      <b>Born: </b>{{ data.director.Birth }}
-      <br />
-      <br />
-      <b>Bio: </b>{{ data.director.Bio }}
-    </mat-dialog-content>
+<mat-card>
+    <mat-card-header class="director-card-header">
+      <mat-card-title class="director-card-title">{{ data.Name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="director-card-content">
+      <p>{{ data.Bio }}</p>
+      <p>Born: {{ data.Birth }}</p>
+      <p *ngIf="data.Death">Died: {{ data.Death }}</p>
+    </mat-card-content>
   </mat-card>

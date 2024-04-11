@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,21 +10,29 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
-import { GenreInfoComponent } from './genre-info/genre-info.component';
-import { DirectorInfoComponent } from './director-info/director-info.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { UserProfileComponent } from './profile-page/profile-page.component';
+import { DirectorInfoComponent } from './director-info/director-info.component';
+import { GenreInfoComponent } from './genre-info/genre-info.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+
+const appRoutes: Routes = [
+
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'profile' , component: UserProfileComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+];
 
 @NgModule({
   declarations: [
@@ -30,11 +40,12 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     MovieCardComponent,
-    GenreInfoComponent,
-    DirectorInfoComponent,
     MovieDetailsComponent,
     NavbarComponent,
-    ProfilePageComponent
+ 
+    DirectorInfoComponent,
+    GenreInfoComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -49,12 +60,11 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     MatSnackBarModule,
     MatToolbarModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
+    MatIconModule,
+    MatMenuModule
   ],
-  providers: [
-    provideClientHydration(),
-    provideAnimationsAsync(),
-    provideHttpClient(withFetch()), // Configure HttpClient to use fetch APIs
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
