@@ -1,4 +1,3 @@
-// src/app/user-registration-form/user-registration-form.component.ts
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -26,15 +25,11 @@ export class UserRegistrationFormComponent implements OnInit {
       (result) => {
         this.dialogRef.close(); 
         console.log(result); // This will close the modal on success!
-        this.snackBar.open(result, 'OK', {
-          duration: 2000
-        });
+        this.snackBar.open('Sign up successful', 'OK', { duration: 2000 });
       },
-      (result) => {
-        console.log(result);
-        this.snackBar.open(result, 'OK', {
-          duration: 2000
-        });
+      (error) => {
+        console.log(error);
+        this.snackBar.open('Error: ' + error.message, 'OK', { duration: 2000 });
       }
     );
   }
