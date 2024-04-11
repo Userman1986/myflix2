@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DirectorInfoComponent } from './director-info.component';
+import { DirectorComponent } from './director.component';
 
-describe('DirectorInfoComponent', () => {
-  let component: DirectorInfoComponent;
-  let fixture: ComponentFixture<DirectorInfoComponent>;
+describe('DirectorComponent', () => {
+  let component: DirectorComponent;
+  let fixture: ComponentFixture<DirectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DirectorInfoComponent]
+      imports: [DirectorComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DirectorInfoComponent);
+    fixture = TestBed.createComponent(DirectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

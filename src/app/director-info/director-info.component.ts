@@ -1,10 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+/**
+ * @description Component representing a director card.
+ * @selector 'app-director'
+ * @templateUrl './director.component.html'
+ * @styleUrls ['../director.component.scss']
+ */
 
 @Component({
-  selector: 'app-director-info',
-  templateUrl: './director-info.component.html',
-  styleUrl: './director-info.component.scss'
+  selector: 'app-director',
+  templateUrl: './director.component.html',
+  styleUrls: ['./director.component.scss']
 })
-export class DirectorInfoComponent {
+export class DirectorComponent implements OnInit {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { director: any}) { }
+
+  ngOnInit(): void {
+  }
 
 }
