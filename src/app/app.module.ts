@@ -22,7 +22,7 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { MovieCardComponent } from './movie-card/movie-card.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { UserProfileComponent } from './profile-page/profile-page.component';
+import { ProfileComponent } from './profile-page/profile-page.component';
 import { DirectorInfoComponent } from './director-info/director-info.component';
 import { GenreInfoComponent } from './genre-info/genre-info.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
@@ -30,7 +30,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 const appRoutes: Routes = [
 
   { path: 'movies', component: MovieCardComponent },
-  { path: 'profile' , component: UserProfileComponent },
+  { path: 'profile' , component: ProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 

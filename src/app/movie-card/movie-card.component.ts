@@ -103,7 +103,7 @@ export class MovieCardComponent implements OnInit {
       console.log('user:', parsedUser);
       this.userData.UserId = parsedUser._id;
       console.log('userData:', this.userData);
-      this.fetchApiData.addFavoriteMovie(parsedUser._id, movie._id).subscribe((Resp) => {
+      this.fetchApiData.addFavoriteMovies(parsedUser._id, movie._id).subscribe((Resp) => {
         console.log('server response:', Resp);
         localStorage.setItem('user', JSON.stringify(Resp));
         this.getFavMovies();
