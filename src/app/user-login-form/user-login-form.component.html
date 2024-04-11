@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <mat-card>
     <mat-card-header class="card-header">
       <mat-card-title>Login</mat-card-title>
@@ -10,7 +11,7 @@
             [(ngModel)]="userData.Username"
             placeholder="Username"
             type="text"
-            name="Username"
+            name="username" 
             required
           />
         </mat-form-field>
@@ -20,7 +21,7 @@
             [(ngModel)]="userData.Password"
             type="password"
             placeholder="Password"
-            name="Password"
+            name="password"
             required
           />
         </mat-form-field>
@@ -36,4 +37,4 @@
         Login
       </button>
     </mat-card-actions>
-  </mat-card>
+</mat-card>
