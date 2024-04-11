@@ -18,8 +18,8 @@ export class AppComponent {
     });
   }
 
-  showLoginFormMessage(): void {
-    // Create an instance of UserLoginFormComponent
+  openUserLoginDialog(): void {
+    // Open the login dialog when the "Login" button is clicked
     const dialogRef = this.dialog.open(UserLoginFormComponent, {
       width: '280px'
     });
