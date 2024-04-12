@@ -10,8 +10,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-genre',
-  templateUrl: './genre-info.component.html',
-  styleUrls: ['./genre-info.component.scss']
+  templateUrl: './genre.component.html',
+  styleUrls: ['./genre.component.scss']
 })
 export class GenreComponent implements OnInit {
 
