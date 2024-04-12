@@ -5,10 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreComponent } from '../genre/genre.component';
-import { DirectorInfoComponent } from '../director-info/director-info.component';
+import { DirectorComponent } from '../director/director.component';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
-import { GenreInfoComponent } from '../genre-info/genre-info.component';
-
 
 /**
  * @description Component representing the navigation bar.
@@ -53,7 +51,7 @@ export class ProfileComponent implements OnInit {
    */
 
   public loadUser(): void {
-    this.user = this.fetchApiData.getUser();
+    this.user = this.fetchApiData.getOneUser();
     this.fetchApiData.getAllMovies().subscribe((response) => {
       this.FavoriteMovies = response.filter((movie: any) => this.user.FavoriteMovies.includes(movie._id));
     });
@@ -114,7 +112,7 @@ export class ProfileComponent implements OnInit {
    */
   
     getFavorites(): void {
-      this.fetchApiData.getUser().subscribe(
+      this.fetchApiData.getOneUser().subscribe(
         (resp: any) => {
           if (resp.user && resp.user.FavoriteMovies) {
             this.favorites = resp.user.FavoriteMovies;
@@ -145,7 +143,7 @@ export class ProfileComponent implements OnInit {
         this.removeFavoriteMovie(id);
       } else {
         // Movie is not a favorite, so add it
-        this.fetchApiData.addFavouriteMovies(id).subscribe(() => {
+        this.fetchApiData.addFavoriteMovies(id).subscribe(() => {
           this.snackBar.open('Movie added to favorites', 'OK', {
             duration: 2000,
           });
@@ -160,7 +158,7 @@ export class ProfileComponent implements OnInit {
    */
 
     removeFavoriteMovie(id: string): void {
-      this.fetchApiData.deleteFavouriteMovies(id).subscribe(() => {
+      this.fetchApiData.deleteFavoriteMovie(id).subscribe(() => {
         this.snackBar.open('removed from favorites', 'OK', {
           duration: 2000
         })
@@ -182,7 +180,7 @@ export class ProfileComponent implements OnInit {
    */
 
     public getOneDirector(director: any){
-      this.dialog.open(DirectorInfoComponent, { width: '400px', height: '300px', data: {director: director}});
+      this.dialog.open(DirectorComponent, { width: '400px', height: '300px', data: {director: director}});
     }  
 
     /**
