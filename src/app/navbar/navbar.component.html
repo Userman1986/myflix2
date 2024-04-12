@@ -1,17 +1,11 @@
-<mat-toolbar class="navbar" role="navigation" color="black">
-    <button mat-button (click)="openMovies()">
-      <h1>MyFlix</h1>
-    </button>
-  
-    <span class="example-spacer"></span>
-  
-    <button class="menus" mat-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
+<div class="navigation-bar">
+    <h1>MyFlix Movies App</h1>
+    <button class="menus" mat-button [matMenuTriggerFor]="menu" >
+        <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openMovies()">Home</button>
-      <button mat-menu-item (click)="openProfile()">Profile</button>
+      <button mat-menu-item (click)="openMovieList()">Home</button>
+      <button mat-menu-item (click)="openProfile()"> Profile</button>
       <button mat-menu-item (click)="logoutUser()">Logout</button>
     </mat-menu>
-  </mat-toolbar>
-  
+</div>

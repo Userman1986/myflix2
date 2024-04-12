@@ -26,6 +26,8 @@ import { ProfileComponent } from './profile-page/profile-page.component';
 import { DirectorInfoComponent } from './director-info/director-info.component';
 import { GenreInfoComponent } from './genre-info/genre-info.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const appRoutes: Routes = [
 
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
  
     DirectorInfoComponent,
     GenreInfoComponent,
+    WelcomePageComponent,
     
   ],
   imports: [
@@ -64,7 +67,9 @@ const appRoutes: Routes = [
     MatIconModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

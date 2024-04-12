@@ -1,12 +1,20 @@
-.navigation-bar{
-    background-color: rgb(118, 207, 200);;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;    
-    padding: 15px;
-}
+.summary-close-button {
+    width: fit-content;
+    align-self: flex-end;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .summary-dialog-title {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: black;
+  }
 
-h1{
-    color: white;
-    margin-right: calc(100%/4);
+  .summary-dialog {
+    color: black;
+  }
+
+.mat-card {
+  color:black !important;
 }
