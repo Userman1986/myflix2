@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,29 +9,40 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-registration-form.component.scss']
 })
 export class UserRegistrationFormComponent implements OnInit {
-
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  userData: any = {};
 
   constructor(
-    public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fetchApiData: FetchApiDataService,
+    private snackBar: MatSnackBar
+  ) {
+    if (data && data.userData) {
+      this.userData = data.userData;
+    }
+  }
 
+  ngOnInit(): void {}
 
-  ngOnInit(): void { }
-
-  registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe(
-      (result) => {
+  onSubmit(): void {
+    if (this.userData._id) {
+      this.fetchApiData.updateUser(this.userData).subscribe(() => {
+        this.snackBar.open('User updated successfully', 'OK', {
+          duration: 3000
+        });
+        this.dialogRef.close(this.userData);
+      });
+    } else {
+      this.fetchApiData.userRegistration(this.userData).subscribe(() => {
+        this.snackBar.open('User registered successfully', 'OK', {
+          duration: 3000
+        });
         this.dialogRef.close();
-        console.log(result); // This will close the modal on success!
-        this.snackBar.open('Sign up successful', 'OK', { duration: 2000 });
-      },
-      (error) => {
-        console.log(error);
-        this.snackBar.open('Error: ' + error.message, 'OK', { duration: 2000 });
-      }
-    );
+      });
+    }
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
   }
 }

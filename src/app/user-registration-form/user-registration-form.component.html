@@ -1,52 +1,24 @@
-<!DOCTYPE html>
-<mat-card>
-  <mat-card-title style="margin: 20px;">
-    Sign Up
-</mat-card-title>
-    <mat-card-content>
-      <form>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="userData.Username"
-            placeholder="Username"
-            type="text"
-            name="Username"
-            required
-          >
-          </mat-form-field>
-          <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="userData.Password"
-            type = "password"
-            placeholder="Password"
-            name="Password"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="userData.Email"
-            type = "email"
-            placeholder="Email"
-            name="Email"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="userData.Birthday"
-            type = "date"
-            placeholder="Birthday"  
-            name="Birthday"
-          >
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-    <button mat-raised-button (click)="registerUser()" color="primary" style="margin-bottom: 20px;">Sign Up</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="form-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Enter your username" [(ngModel)]="userData.Username">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" placeholder="Enter your password" [(ngModel)]="userData.Password">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" placeholder="Enter your email" [(ngModel)]="userData.Email">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Birthday</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="Choose your birthday" [(ngModel)]="userData.Birthday">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-raised-button (click)="onSubmit()" color="primary" style="margin-bottom: 20px;">{{ data && data.userData ? 'Update User' : 'Sign Up' }}</button>
+    <button mat-raised-button (click)="onCancel()" color="warn">Cancel</button>
+  </div>
+</div>
