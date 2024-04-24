@@ -30,7 +30,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepiker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -71,7 +71,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatToolbarModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    RouterModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
