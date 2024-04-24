@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:myflix2": "node dist/myflix2/server/server.mjs",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist/myflix2"
   },
   "private": true,
   "dependencies": {
