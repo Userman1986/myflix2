@@ -18,12 +18,13 @@ export class UserRegistrationFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) { }
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void { }
 
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (result) => {
-        this.dialogRef.close(); 
+        this.dialogRef.close();
         console.log(result); // This will close the modal on success!
         this.snackBar.open('Sign up successful', 'OK', { duration: 2000 });
       },
