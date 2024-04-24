@@ -21,12 +21,16 @@ export class UserRegistrationFormComponent implements OnInit {
       this.userData = data.userData;
     }
   }
-
-  ngOnInit(): void {}
-
+  
+  ngOnInit(): void {
+    const userId = this.data.userId; // Get userId from data
+  }
+  
   onSubmit(): void {
+    const userId = this.data.userId; // Get userId from data
+  
     if (this.userData._id) {
-      this.fetchApiData.updateUser(this.userData).subscribe(() => {
+      this.fetchApiData.updateUser(userId, this.userData).subscribe(() => {
         this.snackBar.open('User updated successfully', 'OK', {
           duration: 3000
         });
@@ -41,7 +45,7 @@ export class UserRegistrationFormComponent implements OnInit {
       });
     }
   }
-
+  
   onCancel(): void {
     this.dialogRef.close();
   }

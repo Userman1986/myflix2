@@ -133,10 +133,9 @@ export class FetchApiDataService {
     return user.FavoriteMovies.indexOf(movieID) >= 0;
   }
 
-  public updateUser(updatedUser: any): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+  public updateUser(userId: string, userData: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/' + user.Username, updatedUser, {
+    return this.http.put(apiUrl + 'users/' + userId, userData, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
