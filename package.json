@@ -1,6 +1,8 @@
 {
   "name": "myflix2",
   "version": "0.0.0",
+  
+  "homepage": "https://userman1986.github.io/myflix2/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 1234",
