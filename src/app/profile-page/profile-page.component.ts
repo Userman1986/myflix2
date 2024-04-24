@@ -45,9 +45,21 @@ export class ProfileComponent implements OnInit {
   }
 
   public updateUser(): void {
-    this.dialog.open(UserRegistrationFormComponent, {
-      width: '280px',
-      data: { userData: this.user }
+    this.fetchApiData.updateUser(this.user._id, {
+      username: this.user.Username,
+      email: this.user.Email,
+      dateOfBirth: this.user.Birth,
+      favoriteMovies: this.user.FavoriteMovies
+    }).subscribe((updatedUser: any) => {
+      this.user = updatedUser;
+      this.snackBar.open('User updated successfully', 'OK', {
+        duration: 2000,
+      });
+    }, (error: any) => {
+      console.error('Error updating user:', error);
+      this.snackBar.open('Error updating user', 'OK', {
+        duration: 2000,
+      });
     });
   }
 
