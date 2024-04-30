@@ -67,19 +67,12 @@ export class MovieCardComponent implements OnInit {
     * */
 
   getFavorites(): void {
-    this.fetchApiData.getOneUser().subscribe(
-      (resp: any) => {
-        if (resp.user && resp.user.FavoriteMovies) {
-          this.favorites = resp.user.FavoriteMovies;
-        } else {
-          this.favorites = []; // Set an empty array if data is not available
-        }
-      },
-      (error: any) => {
-        console.error('Error fetching user data:', error);
-        this.favorites = []; // Set an empty array on error as well
-      }
-    );
+    const user = this.fetchApiData.getOneUser();
+    if (user && user.FavoriteMovies) {
+      this.favorites = user.FavoriteMovies;
+    } else {
+      this.favorites = []; // Set an empty array if data is not available
+    }
   }
 
   /**
