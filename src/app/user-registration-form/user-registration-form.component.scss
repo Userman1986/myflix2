@@ -1,23 +1,22 @@
-/* Center the form container */
-.form-container {
-    width: 300px;
-    margin: 0 auto;
-  }
-  
-  /* Add some padding to the form fields */
-  .mat-form-field {
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  /* Style the buttons */
-  .buttons {
+// .signup-page{
+//     width: 800px;
+// }
+mat-card-title{
+    font-size: 22px;
+    font-weight: 500;
+    margin: 5px 80px;
+}
+form{
     display: flex;
-    justify-content: space-between;
-  }
-  
-  /* Apply margin-bottom to the first button */
-  .buttons button:first-child {
-    margin-bottom: 20px;
-  }
-  
+    flex-direction: column;
+    margin: 1rem auto;
+    width: 100%;
+}
+.signup-btn{
+    margin: 10px auto;
+    padding: 1.5rem;
+    font-size: 18px;
+    background-color: #9a1d1d!important;
+    color: #e8f7ee!important; 
+    width: 90%;
+}
