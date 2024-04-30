@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserData();
     this.getAllMovies();
-    this.loadFavoriteMovies();
   }
 
   public loadUserData(): void {
@@ -47,7 +46,9 @@ export class ProfileComponent implements OnInit {
 
   public loadFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((response) => {
-      this.favoriteMovies = response;
+      if (Array.isArray(response)) {
+        this.favoriteMovies = response.map((favoriteMovie: any) => favoriteMovie ? this.movies.find((movie: any) => movie._id === favoriteMovie) : null).filter(Boolean);
+      }
     });
   }
 
@@ -121,6 +122,7 @@ export class ProfileComponent implements OnInit {
   public getAllMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
+      this.loadFavoriteMovies()
     });
   }
 }
