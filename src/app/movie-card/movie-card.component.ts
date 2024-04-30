@@ -39,32 +39,32 @@ export class MovieCardComponent implements OnInit {
     */
 
   constructor(public fetchApiData: FetchApiDataService,
-              public router: Router,
-              public dialog: MatDialog,
-              public snackBar: MatSnackBar
-    ) { }
+    public router: Router,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
+  ) { }
 
-ngOnInit(): void {
-  this.getAllMovies();
-}
+  ngOnInit(): void {
+    this.getAllMovies();
+    this.favorites = this.user.FavoriteMovies || [];
+  }
 
   /**
  * This will get all movies from the API
  * @returns movies
  */
 
-getAllMovies(): void {
-  this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+  getAllMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
       return this.movies;
     });
   }
 
- /** 
-   * Get user info and set favorites
-   * @returns favorite movies selected by user
-   * */
+  /** 
+    * Get user info and set favorites
+    * @returns favorite movies selected by user
+    * */
 
   getFavorites(): void {
     this.fetchApiData.getOneUser().subscribe(
@@ -82,11 +82,11 @@ getAllMovies(): void {
     );
   }
 
- /**
-    * Check if a movie is a user's favorite already
-    * @param movieID
-    * @returns boolean
-    * */
+  /**
+     * Check if a movie is a user's favorite already
+     * @param movieID
+     * @returns boolean
+     * */
 
   isFavoriteMovie(movieID: string): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -101,18 +101,12 @@ getAllMovies(): void {
    * */
 
   public addToFavorites(id: string): void {
-    if (this.isFavoriteMovie(id)) {
-      // Movie is already a favorite, so remove it
-      this.removeFavoriteMovie(id);
-    } else {
-      // Movie is not a favorite, so add it
-      this.fetchApiData.addFavoriteMovies(id).subscribe(() => {
-        this.snackBar.open('Movie added to favorites', 'OK', {
-          duration: 2000,
-        });
-        this.getFavorites();
+    this.fetchApiData.addFavoriteMovies(id).subscribe(() => {
+      this.snackBar.open('Movie added to favorites', 'OK', {
+        duration: 2000,
       });
-    }
+      this.getFavorites();
+    });
   }
 
   /**
@@ -122,21 +116,22 @@ getAllMovies(): void {
  */
 
   public removeFavoriteMovie(id: string): void {
-    this.fetchApiData.deleteFavoriteMovie(id).subscribe(() => {
+    this.fetchApiData.removeFavoriteMovie(id).subscribe(() => {
       this.snackBar.open('removed from favorites', 'OK', {
         duration: 2000
-      })
+      });
+      this.getFavorites();
     });
   }
 
-   /** 
-   *  Open genre information from GenreComponent 
-   * @param genre 
-   * @returns genres name and details
-   * */
+  /** 
+  *  Open genre information from GenreComponent 
+  * @param genre 
+  * @returns genres name and details
+  * */
 
-  public getGenre(genre: any){
-    this.dialog.open(GenreComponent, { width: '400px', height: '300px', data: {genre: genre}});
+  public getGenre(genre: any) {
+    this.dialog.open(GenreComponent, { width: '400px', height: '300px', data: { genre: genre } });
   }
 
   /** 
@@ -145,17 +140,16 @@ getAllMovies(): void {
  * @returns director name, bio, birth
  * */
 
-  public getOneDirector(director: any){
-    this.dialog.open(DirectorComponent, { width: '400px', height: '300px', data: {director: director}});
-  }  
+  public getOneDirector(director: any) {
+    this.dialog.open(DirectorComponent, { width: '400px', height: '300px', data: { director: director } });
+  }
 
   /** Open movie description from MovieDetailsComponent
  * @param details
  * @returns movie Title, Description
  * */
 
-  public openMovieDetails(details: string){
-    this.dialog.open(MovieDetailsComponent, { width: '400px', height: '300px', data: {details: details}});
+  public openMovieDetails(details: string) {
+    this.dialog.open(MovieDetailsComponent, { width: '400px', height: '300px', data: { details: details } });
   }
-
 }
