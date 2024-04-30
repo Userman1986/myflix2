@@ -7,6 +7,7 @@ import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ import { UserRegistrationFormComponent } from '../user-registration-form/user-re
 export class ProfileComponent implements OnInit {
 
   user: any = {};
+  userData: any = {};
   favoriteMovies: any[] = [];
   movies: any[] = [];
 
@@ -26,13 +28,24 @@ export class ProfileComponent implements OnInit {
     public snackBar: MatSnackBar
   ) { }
 
-  ngOnInit(): void { 
-    this.loadUser();
+  ngOnInit(): void {
+    this.loadUserData();
     this.getAllMovies();
+    this.loadFavoriteMovies();
   }
 
-  public loadUser(): void { 
-    this.user = this.fetchApiData.getOneUser();
+  public loadUserData(): void {
+    const savedUser = localStorage.getItem('user');
+    const user = JSON.parse(savedUser || '{}');
+    this.user = user;
+    this.userData = {
+      Username: user.Username,
+      Email: user.Email,
+      Birthday: formatDate(user.Birthday, 'yyyy-MM-dd', 'en-US'),
+    };
+  }
+
+  public loadFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((response) => {
       this.favoriteMovies = response;
     });
@@ -43,34 +56,16 @@ export class ProfileComponent implements OnInit {
   }
 
   public updateUser(): void {
-    const dialogRef = this.dialog.open(UserRegistrationFormComponent, {
-      width: '280px',
-      data: { userData: this.user, userId: this.user._id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.user = result;
-        this.fetchApiData.updateUser(this.user._id, {
-          Username: this.user.Username,
-          Email: this.user.Email,
-          Birth: this.user.Birth,
-          FavoriteMovies: this.user.FavoriteMovies
-        }).subscribe(
-          (updatedUser: any) => {
-            this.user = updatedUser;
-            this.snackBar.open('Profile updated successfully', 'OK', {
-              duration: 2000
-            });
-          },
-          (error: any) => {
-            console.error('Error updating user:', error);
-            this.snackBar.open('Failed to update profile', 'OK', {
-              duration: 2000
-            });
-          }
-        );
-      }
+    this.fetchApiData.updateUser(this.user._id, {
+      Username: this.userData.Username,
+      Email: this.userData.Email,
+      Birthday: this.userData.Birthday,
+    }).subscribe((user) => {
+      this.snackBar.open('User updated successfully', 'OK', {
+        duration: 3000
+      });
+      this.user = user;
+      localStorage.setItem('user', JSON.stringify(user));
     });
   }
 
