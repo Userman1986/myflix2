@@ -4,21 +4,21 @@
       <mat-card-title class="info">PROFILE</mat-card-title>
 
       <mat-card-content>
-        Username: {{user.Username}} <br/>
-        Email: {{user.Email}} <br/>
-        Birthday: {{user.Birth | date:'longDate'}}<br/>
+        Username: {{userData.Username}} <br/>
+        Email: {{userData.Email}} <br/>
+        Birthday: {{userData.Birthday | date:'longDate'}}<br/>
       </mat-card-content>
       <div>
         <label for="username">Username:</label>
-        <input type="text" id="username" [(ngModel)]="user.Username">
+        <input type="text" id="username" [(ngModel)]="userData.Username">
       </div>
       <div>
         <label for="email">Email:</label>
-        <input type="email" id="email" [(ngModel)]="user.Email">
+        <input type="email" id="email" [(ngModel)]="userData.Email">
       </div>
       <div>
         <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" [(ngModel)]="user.Birth">
+        <input type="date" id="birthday" [(ngModel)]="userData.Birthday">
       </div>
       <mat-card-actions>
           <button mat-raised-button (click)="back()" color="primary" style="margin: 20px;">
